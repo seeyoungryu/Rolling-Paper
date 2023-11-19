@@ -5,8 +5,6 @@ import com.sparta.rollingpaper.dto.RollingPaperRequestDto;
 import com.sparta.rollingpaper.entity.RollingPaper;
 import com.sparta.rollingpaper.repository.RollingPaperRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +16,7 @@ public class RollingPaperService {
     private final RollingPaperRepository rollingPaperRepository;
 
 
-    public RollingPaperReponseDto createRollingPaper(RollingPaperRequestDto rollingPaperRequestDto) {
+    public RollingPaperReponseDto createRollingPaper(String currentUserId, RollingPaperRequestDto rollingPaperRequestDto) {
         // 요청 DTO를 이용하여 게시물 엔티티 생성 후 저장
         RollingPaper rollingPaper = new RollingPaper(rollingPaperRequestDto);
         RollingPaper savedRollingPaper = rollingPaperRepository.save(rollingPaper);
@@ -38,4 +36,4 @@ public class RollingPaperService {
     // CRUD methods here
 }
 
-//작성시에 예외처리 : 롤링페이퍼 작성할때 로그인안된 상태면 (토큰 ㅌ없으니까 ) 에러 >> 로그인이 필요합니다 메세지ㅣ 나오게
+//작성시에 예외처리 : 롤링페이퍼 작성할때 로그인안된 상태면 에러 >> 로그인이 필요합니다
