@@ -3,7 +3,10 @@ package com.sparta.rollingpaper.service;
 import com.sparta.rollingpaper.dto.RollingPaperReponseDto;
 import com.sparta.rollingpaper.dto.RollingPaperRequestDto;
 import com.sparta.rollingpaper.entity.RollingPaper;
+import com.sparta.rollingpaper.entity.User;
 import com.sparta.rollingpaper.repository.RollingPaperRepository;
+import com.sparta.rollingpaper.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +17,18 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class RollingPaperService {
     private final RollingPaperRepository rollingPaperRepository;
+    private final UserRepository userRepository;
 
+    @Transactional
+    public RollingPaperReponseDto createRollingPaper(String userId,RollingPaperRequestDto rollingPaperRequestDto) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
-    public RollingPaperReponseDto createRollingPaper(String currentUserId, RollingPaperRequestDto rollingPaperRequestDto) {
-        // 요청 DTO를 이용하여 게시물 엔티티 생성 후 저장
-        RollingPaper rollingPaper = new RollingPaper(rollingPaperRequestDto);
+        // 롤링페이퍼 생성
+        RollingPaper rollingPaper = new RollingPaper(user, rollingPaperRequestDto);
         RollingPaper savedRollingPaper = rollingPaperRepository.save(rollingPaper);
+
+
         return new RollingPaperReponseDto(savedRollingPaper);
     }
 
