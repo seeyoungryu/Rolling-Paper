@@ -33,7 +33,7 @@ public class UserController {
     // 자기소개 작성
     // API 요청이 들어올 때, 현재 인증된 사용자의 ID가 요청과 일치하는지 확인
     // Authentication 객체를 사용하여 현재 인증된 사용자의 정보를 가져오게 수정
-    @PostMapping("/user/bio")
+    @PostMapping("/users/bio")
     public ResponseEntity<BioResponseDto> createBio(@RequestBody BioRequestDto bioRequestDto,
                                                     Authentication authentication) {
         String currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUsername();
@@ -42,7 +42,7 @@ public class UserController {
     }
 
     // 자기소개 목록 조회
-    @GetMapping("/rollingpapers/bio")
+    @GetMapping("/users")
     public ResponseEntity<List<BioResponseDto>> getAllBios() {
         List<BioResponseDto> bios = userService.getAllUserBios();
         return ResponseEntity.ok(bios);

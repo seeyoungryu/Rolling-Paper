@@ -1,10 +1,10 @@
 package com.sparta.rollingpaper.service;
 
-import com.sparta.rollingpaper.dto.RollingPaperReponseDto;
-import com.sparta.rollingpaper.dto.RollingPaperRequestDto;
-import com.sparta.rollingpaper.entity.RollingPaper;
+import com.sparta.rollingpaper.dto.CommentReponseDto;
+import com.sparta.rollingpaper.dto.CommentRequestDto;
+import com.sparta.rollingpaper.entity.Comment;
 import com.sparta.rollingpaper.entity.User;
-import com.sparta.rollingpaper.repository.RollingPaperRepository;
+import com.sparta.rollingpaper.repository.CommentRepository;
 import com.sparta.rollingpaper.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -16,30 +16,30 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class RollingPaperService {
-    private final RollingPaperRepository rollingPaperRepository;
+public class CommentService {
+    private final CommentRepository commentRepository;
     private final UserRepository userRepository;
 
     @Transactional
-    public RollingPaperReponseDto createRollingPaper(RollingPaperRequestDto rollingPaperRequestDto, String currentUserId) {
+    public CommentReponseDto createComment(CommentRequestDto commentRequestDto, String currentUserId) {
         // 현재 인증된 사용자 정보 조회
         User user = userRepository.findById(currentUserId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
         // 롤링페이퍼 생성
-        RollingPaper rollingPaper = new RollingPaper(user, rollingPaperRequestDto);
-        RollingPaper savedRollingPaper = rollingPaperRepository.save(rollingPaper);
+        Comment comment = new Comment(user, commentRequestDto);
+        Comment savedComment = commentRepository.save(comment);
 
-        return new RollingPaperReponseDto(savedRollingPaper);
+        return new CommentReponseDto(savedComment);
     }
 
 
     // 모든 게시물 조회
-    public List<RollingPaperReponseDto> getRollingPaper() {
+    public List<CommentReponseDto> getComment() {
         // 모든 게시물 조회 후 DTO로 변환하여 반환
-        return rollingPaperRepository.findAll()
+        return commentRepository.findAll()
                 .stream()
-                .map(RollingPaperReponseDto::new)
+                .map(CommentReponseDto::new)
                 .collect(Collectors.toList());
     }
 
