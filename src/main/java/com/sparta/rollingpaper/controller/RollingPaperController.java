@@ -7,6 +7,7 @@ import com.sparta.rollingpaper.service.RollingPaperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,22 +22,21 @@ public class RollingPaperController {
     // CRUD endpoints here
 
 
-    @PostMapping("/user/comments/{userId}")
-    public ResponseEntity<RollingPaperReponseDto> createRollingPaper(@RequestBody RollingPaperRequestDto rollingPaperRequestDto,
-                                                                     Authentication authentication) {
+    @PostMapping("/user/comments")
+    public ResponseEntity<RollingPaperReponseDto> createRollingPaper(
+            @RequestBody RollingPaperRequestDto rollingPaperRequestDto,
+            Authentication authentication) {
+        // 현재 인증된 사용자의 ID를 가져옴
         String currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUsername();
-//        if (!currentUserId.equals(userId)) {
-//            throw new AccessDeniedException("권한이 없습니다.");
-//        }
-
-        RollingPaperReponseDto createdRollingPaper = rollingPaperService.createRollingPaper(currentUserId, rollingPaperRequestDto);
+        // 현재 인증된 사용자 정보를 사용하여 롤링페이퍼 생성
+        RollingPaperReponseDto createdRollingPaper = rollingPaperService.createRollingPaper(rollingPaperRequestDto, currentUserId);
         return ResponseEntity.status(HttpStatus.OK).body(createdRollingPaper);
     }
 
 
 
     // 모든 게시물 조회 API
-    @GetMapping("/rollingpapers")
+    @GetMapping("/rollingpapers/comments")
     public ResponseEntity<List<RollingPaperReponseDto>> getRollingpapers() {
         List<RollingPaperReponseDto> rollingPapers = rollingPaperService.getRollingPaper();
         return new ResponseEntity<>(rollingPapers, HttpStatus.OK);

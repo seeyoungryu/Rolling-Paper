@@ -10,10 +10,10 @@ import java.time.LocalDateTime;
 @Setter
 public class RollingPaperReponseDto {
     private final String content;
-    private LocalDateTime modifiedAt;
+//    private LocalDateTime modifiedAt;
 
     public RollingPaperReponseDto(RollingPaper rollingPaper) {
         this.content = rollingPaper.getContent();
-        this.modifiedAt = rollingPaper.getModifiedAt();
+//        this.modifiedAt = rollingPaper.getModifiedAt();
     }
 }

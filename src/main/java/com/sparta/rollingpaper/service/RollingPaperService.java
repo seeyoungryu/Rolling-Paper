@@ -21,27 +21,35 @@ public class RollingPaperService {
     private final UserRepository userRepository;
 
     @Transactional
-    public RollingPaperReponseDto createRollingPaper(String userId,RollingPaperRequestDto rollingPaperRequestDto) {
-        User user = userRepository.findById(userId)
+    public RollingPaperReponseDto createRollingPaper(RollingPaperRequestDto rollingPaperRequestDto, String currentUserId) {
+        // 현재 인증된 사용자 정보 조회
+        User user = userRepository.findById(currentUserId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
         // 롤링페이퍼 생성
         RollingPaper rollingPaper = new RollingPaper(user, rollingPaperRequestDto);
         RollingPaper savedRollingPaper = rollingPaperRepository.save(rollingPaper);
 
-
         return new RollingPaperReponseDto(savedRollingPaper);
     }
 
 
     // 모든 게시물 조회
-        public List<RollingPaperReponseDto> getRollingPaper() {
-            // 수정일자를 기준으로 내림차순으로 모든 게시물 조회 후 DTO로 변환하여 반환
-            return rollingPaperRepository.findAllByOrderByModifiedAtDesc()
-                    .stream()
-                    .map(RollingPaperReponseDto::new)
-                    .collect(Collectors.toList());
-        }
+    public List<RollingPaperReponseDto> getRollingPaper() {
+        // 모든 게시물 조회 후 DTO로 변환하여 반환
+        return rollingPaperRepository.findAll()
+                .stream()
+                .map(RollingPaperReponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+//        public List<RollingPaperReponseDto> getRollingPaper() {
+//            // 수정일자를 기준으로 내림차순으로 모든 게시물 조회 후 DTO로 변환하여 반환
+//            return rollingPaperRepository.findAllByOrderByModifiedAtDesc()
+//                    .stream()
+//                    .map(RollingPaperReponseDto::new)
+//                    .collect(Collectors.toList());
+//        }
 
     // CRUD methods here
 }

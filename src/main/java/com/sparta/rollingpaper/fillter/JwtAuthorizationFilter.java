@@ -39,11 +39,12 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         String path = req.getRequestURI();
 
-        // 로그인 및 회원가입 요청 시 필터 적용을 건너뛰기
-        if (path.equals("/api/login") || path.equals("/api/signup")) {
+        // 로그인, 회원가입, 및 /api/rollingpapers/** 요청 시 필터 적용 건너뛰기
+        if (path.equals("/api/login") || path.equals("/api/signup") || path.startsWith("/api/rollingpapers/")) {
             filterChain.doFilter(req, res);
             return;
         }
+
 
         try {
             String token = req.getHeader(JwtUtil.ACCESSTOKEN_HEADER);

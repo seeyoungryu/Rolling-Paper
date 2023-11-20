@@ -7,7 +7,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RollingPaperRequestDto {
-    private String content;
     private String userId;
-
+    private String content;
 }
