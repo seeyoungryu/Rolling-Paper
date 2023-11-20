@@ -4,15 +4,12 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
-//@Builder
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
@@ -26,4 +23,7 @@ public class User {
 
     @Column(nullable = false, unique = true)
     private String userName;
+
+    @Column(length = 500) // 길이 설정
+    private String bio; // 자기소개 필드
 }
