@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -38,9 +39,11 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain filterChain)
             throws ServletException, IOException {
         String path = req.getRequestURI();
+        String method = req.getMethod();
 
         // 로그인, 회원가입, 및 /api/rollingpapers/** 요청 시 필터 적용 건너뛰기
-        if (path.equals("/api/login") || path.equals("/api/signup") || path.startsWith("/api/rollingpapers/")) {
+        if (path.equals("/api/login") || path.equals("/api/signup") || method.equals("GET")) {
+//                || path.equals("/api/users/**") || path.startsWith("/api/users")
             filterChain.doFilter(req, res);
             return;
         }

@@ -1,41 +1,37 @@
 package com.sparta.rollingpaper.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sparta.rollingpaper.dto.RollingPaperRequestDto;
+import com.sparta.rollingpaper.dto.CommentRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.UpdateTimestamp;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "RollingPapers")
-public class RollingPaper {
+@Table(name = "comments")
+public class Comment {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long rollingPaperId;
+    private Long commentId;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
     @Column(nullable = false)
-    private String content;
+    private String comment;
 
 //    @UpdateTimestamp
 //    @Column(name = "modified_at")
 //    private LocalDateTime modifiedAt;
 
-    public RollingPaper(User user, RollingPaperRequestDto requestDto) {
+    public Comment(User user, CommentRequestDto requestDto) {
         this.user = user;
-        this.content = requestDto.getContent();
+        this.comment = requestDto.getComment();
     }
 
 }
