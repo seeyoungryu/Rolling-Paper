@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api")
 public class RollingPaperController {
     private final RollingPaperService rollingPaperService;
 
@@ -20,11 +21,14 @@ public class RollingPaperController {
     // CRUD endpoints here
 
 
-    @PostMapping("/api/user/comments/{userId}")
-    public ResponseEntity<RollingPaperReponseDto> createRollingPaper(@PathVariable String userId,
-                                                                     @RequestBody RollingPaperRequestDto rollingPaperRequestDto,
+    @PostMapping("/user/comments/{userId}")
+    public ResponseEntity<RollingPaperReponseDto> createRollingPaper(@RequestBody RollingPaperRequestDto rollingPaperRequestDto,
                                                                      Authentication authentication) {
         String currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUsername();
+//        if (!currentUserId.equals(userId)) {
+//            throw new AccessDeniedException("권한이 없습니다.");
+//        }
+
         RollingPaperReponseDto createdRollingPaper = rollingPaperService.createRollingPaper(currentUserId, rollingPaperRequestDto);
         return ResponseEntity.status(HttpStatus.OK).body(createdRollingPaper);
     }
@@ -32,7 +36,7 @@ public class RollingPaperController {
 
 
     // 모든 게시물 조회 API
-    @GetMapping("/api/rollingpapers")
+    @GetMapping("/rollingpapers")
     public ResponseEntity<List<RollingPaperReponseDto>> getRollingpapers() {
         List<RollingPaperReponseDto> rollingPapers = rollingPaperService.getRollingPaper();
         return new ResponseEntity<>(rollingPapers, HttpStatus.OK);

@@ -1,9 +1,13 @@
 package com.sparta.rollingpaper.dto;
 
-import lombok.Getter;
+import lombok.*;
 
-@Getter
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RollingPaperRequestDto {
-private String content;
-private Long id;
+    private String content;
+    private String userId;
+
 }

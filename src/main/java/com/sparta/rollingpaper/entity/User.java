@@ -14,6 +14,7 @@ import lombok.*;
 @AllArgsConstructor
 @Table(name = "users")
 public class User {
+
     @Id
     @Column(nullable = false, unique = true)
     private String userId; // 기본 키로 사용(PK)
