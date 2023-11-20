@@ -29,9 +29,9 @@ public class RollingPaper {
     @Column(nullable = false)
     private String content;
 
-    @UpdateTimestamp
-    @Column(name = "modified_at")
-    private LocalDateTime modifiedAt;
+//    @UpdateTimestamp
+//    @Column(name = "modified_at")
+//    private LocalDateTime modifiedAt;
 
     public RollingPaper(User user, RollingPaperRequestDto requestDto) {
         this.user = user;
