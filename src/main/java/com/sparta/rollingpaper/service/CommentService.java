@@ -1,5 +1,6 @@
 package com.sparta.rollingpaper.service;
 
+import com.sparta.rollingpaper.dto.CommentListResponseDto;
 import com.sparta.rollingpaper.dto.CommentReponseDto;
 import com.sparta.rollingpaper.dto.CommentRequestDto;
 import com.sparta.rollingpaper.entity.Comment;
@@ -33,7 +34,6 @@ public class CommentService {
         return new CommentReponseDto(savedComment);
     }
 
-
     // 모든 게시물 조회
     public List<CommentReponseDto> getComment() {
         // 모든 게시물 조회 후 DTO로 변환하여 반환
@@ -42,6 +42,21 @@ public class CommentService {
                 .map(CommentReponseDto::new)
                 .collect(Collectors.toList());
     }
+
+    // 특정 사용자의 댓글만 조회
+    public CommentListResponseDto getCommentsByUserId(String userId) {
+        // 사용자 존재 여부 확인
+        if (!userRepository.existsById(userId)) {
+            throw new EntityNotFoundException("없는 사용자입니다. ID를 다시 확인해 주세요.");
+        }
+
+        List<Comment> comments = commentRepository.findByUserUserId(userId);
+        List<CommentReponseDto> commentDtos = comments.stream()
+                .map(CommentReponseDto::new)
+                .collect(Collectors.toList());
+        return new CommentListResponseDto(commentDtos);
+    }
+
 
 //        public List<RollingPaperReponseDto> getRollingPaper() {
 //            // 수정일자를 기준으로 내림차순으로 모든 게시물 조회 후 DTO로 변환하여 반환
