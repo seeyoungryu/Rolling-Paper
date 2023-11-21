@@ -17,6 +17,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j(topic = "로그인 및 JWT 생성")
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -50,6 +52,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             Authentication authResult) throws IOException {
         UserDetailsImpl userDetails = (UserDetailsImpl) authResult.getPrincipal();
         String userId = userDetails.getUsername(); // UserDetailsImpl에서 userId를 가져옴
+        String userName = userDetails.getUser().getUserName(); // UserDetailsImpl에서 userName을 가져옴
         String role = "ROLE_USER"; // 모든 사용자에게 동일한 권한 부여
 
         String accessToken = jwtUtil.createAccessToken(userId, role);
@@ -58,6 +61,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         response.setContentType("application/json;charset=UTF-8");
 //        response.getWriter().write("{\"accessToken\": \"" + accessToken + "\"}"); // JSON 형태로 accessToken만 반환
+        // JSON 형태로 accessToken, userId, userName 반환
+        Map<String, String> tokens = new HashMap<>();
+//        tokens.put("accessToken", accessToken);
+        tokens.put("userId", userId);
+        tokens.put("userName", userName);
+        response.getWriter().write(objectMapper.writeValueAsString(tokens));
         response.setStatus(HttpServletResponse.SC_OK);
     }
 
