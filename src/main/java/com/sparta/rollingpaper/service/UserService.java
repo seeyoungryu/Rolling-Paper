@@ -59,7 +59,7 @@ public class UserService {
 
     // 자기소개 작성
     @Transactional
-    public BioResponseDto createBio(String currentUserId,BioRequestDto bioRequestDto) {
+    public BioResponseDto updateBio(String currentUserId,BioRequestDto bioRequestDto) {
         // 권한 검증
         if (!currentUserId.equals(bioRequestDto.getUserId())) {
             throw new AccessDeniedException("다른 사용자의 정보에 접근할 수 없습니다.");
