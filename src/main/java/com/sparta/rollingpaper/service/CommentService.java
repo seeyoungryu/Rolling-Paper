@@ -9,6 +9,7 @@ import com.sparta.rollingpaper.repository.CommentRepository;
 import com.sparta.rollingpaper.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,6 +58,19 @@ public class CommentService {
         return new CommentListResponseDto(commentDtos);
     }
 
+    // comment 삭제
+    @Transactional
+    public void deleteComment(Long commentId, String currentUserId) {
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new EntityNotFoundException("해당 작성글이 없습니다."));
+
+        if (!comment.getUser().getUserId().equals(currentUserId)) {
+            throw new AccessDeniedException("삭제 권한이 없습니다.");
+        }
+
+        commentRepository.delete(comment);
+    }
+
 
 //        public List<RollingPaperReponseDto> getRollingPaper() {
 //            // 수정일자를 기준으로 내림차순으로 모든 게시물 조회 후 DTO로 변환하여 반환
@@ -65,8 +79,4 @@ public class CommentService {
 //                    .map(RollingPaperReponseDto::new)
 //                    .collect(Collectors.toList());
 //        }
-
-    // CRUD methods here
 }
-
-//작성시에 예외처리 : 롤링페이퍼 작성할때 로그인안된 상태면 에러 >> 로그인이 필요합니다

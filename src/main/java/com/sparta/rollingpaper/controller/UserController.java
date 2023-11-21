@@ -33,11 +33,11 @@ public class UserController {
     // 자기소개 작성
     // API 요청이 들어올 때, 현재 인증된 사용자의 ID가 요청과 일치하는지 확인
     // Authentication 객체를 사용하여 현재 인증된 사용자의 정보를 가져오게 수정
-    @PostMapping("/users/bio")
-    public ResponseEntity<BioResponseDto> createBio(@RequestBody BioRequestDto bioRequestDto,
+    @PutMapping("/users/bio")
+    public ResponseEntity<BioResponseDto> updateBio(@RequestBody BioRequestDto bioRequestDto,
                                                     Authentication authentication) {
         String currentUserId = ((UserDetailsImpl) authentication.getPrincipal()).getUsername();
-        BioResponseDto bioResponseDto = userService.createBio(currentUserId, bioRequestDto);
+        BioResponseDto bioResponseDto = userService.updateBio(currentUserId, bioRequestDto);
         return ResponseEntity.status(HttpStatus.OK).body(bioResponseDto);
     }
 
