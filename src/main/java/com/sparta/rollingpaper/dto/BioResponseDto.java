@@ -6,10 +6,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BioResponseDto {
+    private String userId;
     private String userName;
     private String bio;
 
-    public BioResponseDto(String userName, String bio) {
+    public BioResponseDto(String userId,String userName, String bio) {
+        this.userId = userId;
         this.userName = userName;
         this.bio = bio;
     }

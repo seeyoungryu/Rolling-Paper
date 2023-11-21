@@ -70,14 +70,14 @@ public class UserService {
         user.setBio(bioRequestDto.getBio());
         userRepository.save(user);
 
-        return new BioResponseDto(user.getUserName(), user.getBio());
+        return new BioResponseDto(user.getUserId(), user.getUserName(), user.getBio());
     }
 
     // 메인페이지에 자기소개 목록 조회
     public List<BioResponseDto> getAllUserBios() {
         List<User> users = userRepository.findAll();
         return users.stream()
-                .map(user -> new BioResponseDto(user.getUserName(), user.getBio()))
+                .map(user -> new BioResponseDto(user.getUserId(), user.getUserName(), user.getBio()))
                 .collect(Collectors.toList());
     }
 }
