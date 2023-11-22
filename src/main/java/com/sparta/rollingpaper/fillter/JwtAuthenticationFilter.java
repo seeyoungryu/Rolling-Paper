@@ -57,17 +57,33 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         String accessToken = jwtUtil.createAccessToken(userId, role);
 
+        // JWT를 헤더에 추가
         jwtUtil.addJwtToHeader(JwtUtil.ACCESSTOKEN_HEADER, accessToken, response);
 
-        response.setContentType("application/json;charset=UTF-8");
-//        response.getWriter().write("{\"accessToken\": \"" + accessToken + "\"}"); // JSON 형태로 accessToken만 반환
-        // JSON 형태로 accessToken, userId, userName 반환
+        // CORS 헤더를 설정
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+
+        // 응답 본문에 JSON 형태로 accessToken, userId, userName을 반환.
         Map<String, String> tokens = new HashMap<>();
 //        tokens.put("accessToken", accessToken);
         tokens.put("userId", userId);
         tokens.put("userName", userName);
         response.getWriter().write(objectMapper.writeValueAsString(tokens));
         response.setStatus(HttpServletResponse.SC_OK);
+
+//        response.setContentType("application/json;charset=UTF-8");
+////        response.getWriter().write("{\"accessToken\": \"" + accessToken + "\"}"); // JSON 형태로 accessToken만 반환
+//        // JSON 형태로 accessToken, userId, userName 반환
+//        Map<String, String> tokens = new HashMap<>();
+////        tokens.put("accessToken", accessToken);
+//        tokens.put("userId", userId);
+//        tokens.put("userName", userName);
+//        response.getWriter().write(objectMapper.writeValueAsString(tokens));
+//        response.setStatus(HttpServletResponse.SC_OK);
     }
 
     @Override

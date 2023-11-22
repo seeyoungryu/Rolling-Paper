@@ -51,7 +51,7 @@ public class UserService {
                 .userId(userId)
                 .password(password)
                 .userName(userName)
-                .bio(" ") // 초기값 설정
+                .bio(".") // 초기값 설정
                 .build();
         userRepository.save(user);
         return user;
