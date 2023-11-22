@@ -46,15 +46,15 @@ public class UserService {
             throw new IllegalArgumentException("가입한 사용자가 존재합니다.");
         }
 
-            // 사용자 정보 저장
+        // 사용자 정보 저장
         User user = User.builder()
                 .userId(userId)
                 .password(password)
                 .userName(userName)
-                .bio(null) // 초기값 설정 또는 생략
+                .bio(" ") // 초기값 설정
                 .build();
         userRepository.save(user);
-            return user;
+        return user;
     }
 
     // 자기소개 작성
