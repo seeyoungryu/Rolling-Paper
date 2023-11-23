@@ -69,7 +69,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         // 응답 본문에 JSON 형태로 accessToken, userId, userName을 반환.
         Map<String, String> tokens = new HashMap<>();
-//        tokens.put("accessToken", accessToken);
+        tokens.put("accessToken", accessToken);
         tokens.put("userId", userId);
         tokens.put("userName", userName);
         response.getWriter().write(objectMapper.writeValueAsString(tokens));
