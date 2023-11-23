@@ -1,5 +1,13 @@
 # Rolling-Paper
 
+notion link
+
+https://www.notion.so/2-SA-1-2460a18d65b2424ea781e6114d072d44
+
+----------------------------------------------------------------
+
+
+
 ### 🎆**Project-Name : Rolling-Paper★**
 
 ### ✨Project-Overview : 롤링페이퍼 사이트 구현
