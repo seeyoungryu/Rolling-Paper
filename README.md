@@ -18,27 +18,6 @@ https://www.notion.so/2-SA-1-2460a18d65b2424ea781e6114d072d44
 
 </aside>
 
-### **초기 구상**
-
-![스크린샷 2023-11-17 111432.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/953a7687-1102-4f6d-85b3-832126023905/d8e41313-041e-48c5-918e-b74677b564eb/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2023-11-17_111432.png)
-
-### **와이어프레임**
-
-Main.jsx 
-
-![main.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/953a7687-1102-4f6d-85b3-832126023905/a9b619c4-6dd0-4b3a-802b-0da56a807050/main.png)
-
-Login.jsx
-
-![login.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/953a7687-1102-4f6d-85b3-832126023905/3695ba22-85ef-409c-affe-d8f7aea4415c/login.png)
-
-SignUp.jsx
-
-![signUp.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/953a7687-1102-4f6d-85b3-832126023905/ccc9ea08-af50-4915-bc28-41740598db99/signUp.png)
-
-MyPage.jsx
-
-![myPage.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/953a7687-1102-4f6d-85b3-832126023905/4c13f721-7068-4657-b290-6dce8b71e5d1/myPage.png)
 
 <aside>
 📢  **프로젝트 상세 기능**
@@ -70,29 +49,11 @@ MyPage.jsx
 
 <aside>
 ⚙ ERD
+<img width="319" alt="프로젝트ERD" src="https://github.com/seeyoungryu/Rolling-Paper/assets/140057709/f60667e4-4194-4af2-9b09-45bdf23fb722">
 
 </aside>
 
-![프로젝트ERD.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/953a7687-1102-4f6d-85b3-832126023905/3bedb46a-15dc-484b-ae18-1bbf305f5864/%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3ERD.png)
 
-<aside>
-🗓️ **주간 계획**
-
-</aside>
-
-- 2023. 11. 17 (금)
-    - 주제 정하기
-    - S.A 작성 및 제출(17시)
-- 2023. 11. 18 (토)
-    - 오후 S.A. 서면 피드백 확인
-- 2023. 11. 20 (월)
-    - 백엔드 서버와 프론트엔드 연결 시도
-- 2023. 11. 21 (화)
-    - http 백엔드 서버 배포 및 연결 일부 완료.
-- 2023. 11. 22 (수)
-    - https 백엔드 서버 배포 및 연결 성공! (회원가입, 로그인, GET 요청 응답 기능함)
-- 2023. 11. 23 (목)
-    - 
 
 <aside>
 💡 **주특기 프로젝트 2조**
