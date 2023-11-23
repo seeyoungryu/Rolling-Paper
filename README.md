@@ -4,7 +4,6 @@
 
 ### ✨Project-Overview : 롤링페이퍼 사이트 구현
 
-- **필독!! )[프로젝트 협업을 위한 꿀팁 🐝](https://www.notion.so/e43d2baf52ac4ba094b89d4ced54551c?pvs=21) → 여러 번 읽어보면 좋을 것 같습니다 !**
 
 <aside>
 🖼️ **와이어프레임**
