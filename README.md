@@ -12,16 +12,6 @@ https://www.notion.so/2-SA-1-2460a18d65b2424ea781e6114d072d44
 
 ### ✨Project-Overview : 롤링페이퍼 사이트 구현
 
-
-<aside>
-🖼️ **와이어프레임**
-
-</aside>
-
-
-<aside>
-📢  **프로젝트 상세 기능**
-
 </aside>
 
 ## ✏**항해99 롤링페이퍼**
